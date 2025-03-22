@@ -1,0 +1,496 @@
+# Continuous-time signals
+## Transformations on signals
+Given a continuous signal $x(t)$, it has the following transformations:
+1. Time shifting:
+$$
+x(t)\rightarrow x(t-t_0)
+$$
+2. Time reversal:
+$$
+x(t)\rightarrow x(-t)
+$$
+3. Time scaling:
+$$
+x(t)\rightarrow x(kt)
+$$
+4. Amplitude shifting:
+$$
+x(t)\rightarrow x(t)+x_0
+$$
+5. Amplitude scaling:
+$$
+x(t)\rightarrow kx(t)
+$$
+## Properties of signals
+Given a continuous signal $x(t)$, it might has the following properties:
+1. Symmetry:
+i. Symmetry about an axis $t=t_0$ (Even)
+$$
+x(t_0+t)=x(t_0-t)
+$$
+ii. Symmetry about a point $(t_0, x_0)$ (Odd)
+$$
+x(t_0+t)+x(t_0-t)=2x_0
+$$
+Specially, if $x_0=0$:
+$$
+x(t_0+t)+x(t_0-t)=0
+$$
+2. Periodicity
+If $x(t)$ satisfies:
+$$
+x(t+T)=x(t)
+$$
+Then it is periodic, and $T$ is a period of $x(t)$.
+Often, the smallest positive value is chosen as the period.
+
+Given periodic signal $x(t), y(t)$, and let $z(t)=x(t)+y(t)$. It can be concluded that $z(t)$ is periodic as well, with a peroid of $T_z=\text{lcm}(T_x, T_y)$
+3. Support
+If the following proposition is always true:
+$$
+\exists t_0\forall(t<t_0)(x(t)=0)
+$$
+Then $x(t)$ is *left sided*. Analogously, *right sided* function can be defined.
+If $t_0$ in the previous definition is 0, then $x(t)$ can also be called *casual* (right sided) or *anticasual* (left sided)
+If $x(t)$ is both left sided and right-sided, then it's called *time limited*.
+If $x(t)$ is neither left-sided nor right-sided, then it's called *two sided*.
+
+4. Boundedness
+If the following proposition is always true:
+$$
+\exists (A>0)\forall t(|x(t)|\leq A)
+$$
+Then $x(t)$ is *bounded*.
+
+5. Energy
+Given a signal $x(t)$, its energy $E$ is defined as:
+$$
+E=\int_{-\infty}^{\infty} |x(t)|^2\text dt
+$$
+A signal with finite energy is called a energy signal.
+The average power $P$ is given by:
+$$
+P=\lim_{T\rightarrow\infty}\frac1{T}\int_{-T/2}^{T/2}|x(t)|^2\text dt
+$$
+A signal with finite power is called a power signal.
+## Elementary functions
+A number of elementary signals are particularly useful in the study of signals and systems.
+1. Real sinusoidal function
+$$
+x(t)=A\cos(\omega t+\theta)
+$$
+Its period is $T=2\pi/|\omega|$
+2. Complex exponential function
+$$
+x(t)=Ae^{\lambda t}, where\ \lambda=\sigma+j\omega\ (A>0)
+$$
+Using Euler's formula:
+$$
+x(t)=Ae^{\sigma t}[\cos(\omega t)+j\sin(\omega t)]
+$$
+It can be visualised as a rotating vector sliding on the time axis.
+$\sigma$ describes its growth tendancy, and $\omega$ describes its rotating speed and direction.
+Its tip describes a complex helical around the time axis.
+1. Unit-impluse, Unit-step and Unit-ramp function
+$$
+x(t)=\delta(t)=\lim_{\sigma\rightarrow 0}\frac1{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+$$
+$$
+x(t)=u(t)=\cases{
+1, t\geq 0\\
+0, otherwise\\
+}
+$$
+$$
+x(t)=r(t)=\cases{
+t, t\geq 0\\
+0, otherewise \\
+}
+$$
+4. Rectangle function
+$$
+g(t)=\cases{
+\frac 1\varepsilon, |t|<\frac\varepsilon 2\\
+0, otherwise\\
+}
+$$
+5. Signum function
+$$
+\text{sgn } t=\cases{
+1, t>0\\
+0, t=0\\
+-1, t<0\\
+}
+$$
+6. Indicator function
+$$
+\chi_S(t)=\cases{
+1, t\in S\\
+0, otherwise\\
+}
+$$
+7. Triangular function
+$$
+\text{tri } t=\cases{
+1-2|t|, |t|\leq \frac 12\\
+0, otherwise
+}
+$$
+8. Sinc function and normalized sinc function
+i. Sinc function
+$$
+\text{sinc }t=\frac{\sin t}{t}
+$$
+ii. Normalized sinc function
+$$
+x(t)=\frac{\sin(\pi t)}{\pi t}
+$$
+## Continuous-Time Systems
+A system $\mathscr H$ with an input $x$ and an output $y$
+$$
+y=\mathscr Hx
+$$
+### Properties of Systems
+1. Memory
+If for every $t$, $\mathscr Hx(t)$ is completely described by input value of the same point in time, then the system is called *memoryless*. The system that's not memoryless is said to have *memory*.
+2. Casuality
+If for every $t$, $\mathscr Hx(t)$ is completely described by input value of the same or earlier point in time, then the system is called *casual*. The system that's not casual is said to be *noncasual*.
+3. Invertibility
+The inverse of a system $\mathscr H$ is a system $\mathscr G$ such that:
+$$
+\mathscr{GH}x=x
+$$
+If the inverse of a system exists, then it's called *invertible*.
+4. Bounded-Input Bounded-Output (BIBO) Stability
+If for every bounded input, the system's output is also bounded, then it's said to be BIBO stable.
+5. Time Invariance
+Let $\mathscr Tx(t)=x(t-t_0)$, then given a system $\mathscr H$, it's *time invariant* if:
+$$
+\mathscr{TH}x=\mathscr{HTx}
+$$
+Otherwise, it's called *time variant*.
+6. Linearity
+A system $\mathscr H$ is said to be *additive* if, for all functions $x_1, x_2$, the following condition holds:
+$$
+\mathscr H(x_1 +x_2) = \mathscr Hx_1 +\mathscr Hx_2
+$$
+
+A system $\mathscr H$ is said to be *homogeneous* if, for all functions $x$ and complex number $\alpha$, the following condition holds:
+$$
+\mathscr H(\alpha x) = \alpha \mathscr Hx
+$$
+A system $\mathscr H$ is said to be *linear* if it's additive and homogeneous.
+7. Eigenfunctions
+$x$ is the eigenfunction of the system $\mathscr H$, for some complex number $\lambda$, it satisfies:
+$$
+\mathscr Hx=\lambda x
+$$
+$\lambda$ is called an *eigenvalue*.
+# Continuous-Time LTI Systems
+System that boasts both linearity and time-invariance are called Linear Time-Invariant System, or LTI systems for short.
+## Continuous-time convolution
+Given two signals $x(t), y(t)$, then their convolution is defined as:
+$$
+x\ast y(t)=\int_{-\infty}^{\infty}x(\tau)y(t-\tau)\text d\tau
+$$
+It has the following properties:
+1. Commutativity: $x\ast y=y\ast x$
+2. Associativity: $(x\ast y)\ast z=x\ast (y\ast z)$
+3. Distributivity: $x\ast(y+z)=x\ast y+x\ast z$
+4. Identity: $x\ast \delta = x$
+For periodic functions $x, y$ with period $T$, the periodic convolution is defined as:
+$$
+x\bar\ast h(t)=\int_Tx(\tau)y(t-\tau)\text d\tau
+$$
+Let $x_0(t)$ be a period of $x(t)$, then:
+$$
+x(t)=\sum_{n=-\infty}^\infty x_0(t-kT)
+$$
+and we have the following identity:
+$$
+x\bar\ast y(t) = x_0\ast y(t)
+$$
+## Study LTI systems with convolution
+The impulse response of a system $\mathscr H$ is defined as:
+$$
+h=\mathscr H\delta
+$$
+Then given an input $x$, the following holds:
+$$
+\mathscr Hx=x\ast h
+$$
+We will now prove this relationship:
+$$
+\mathscr Hx(t)=\mathscr H[x\ast \delta(t)]
+=x\ast(\mathscr H\delta)(t)=x\ast h(t)
+$$
+The second equality come from the fact that $\mathscr H$ operates on $t$, but in the definition of convolution, only one of the function is written as $\cdot(t-\tau)$, so it only distributed to one of them. Moreover, due to the commutativity of convolution, one can distribute it to either one of the two operands. Here, it's obvious that by pull outside integration and $x(t)$, we arrive at our original identity.
+
+The step response of a system $\mathscr H$ is defined as:
+$$
+s=\mathscr Hu
+$$
+We have the following relationship:
+$$
+h=\mathscr Ds, s=\mathscr Ih
+$$
+Step response is of more use in practical applications, because we in fact cannot produce the unit-impulse signal or an accurate approximation thereof. It's often more realistic to measure the step response of the system, and then calculate impulse response via differentiation.
+
+If the signal passes two LTI systems in series with impulse responses $h_1, h_2$, it's equivalent to passing through the system with an impulse response of $h_1\ast h_2$. This property derives from the associativity of convolution.
+If the signal passes two LTI systems parallel with impulse responses $h_1, h_2$ and are then combined, it's equivalent to passing through the system with an impulse response of $h_1 + h_2$. This property derives from the associativity of convolution.
+As one may start to see, convolution provides some valuable insights into the properties of a LTI system.
+
+1. Memory
+A system is memoryless if and only if:
+$$
+\forall (t\neq 0)(h(t)=0)
+$$
+Proof: Given $t=t_0$
+$$
+x\ast h(t_0)=\int_{-\infty}^\infty h(\tau)x(t_0-\tau)\text d\tau
+$$
+Because the system is memoryless, its output can only depend on the value of $x(t_0)$, which is only possible when $\forall (t\neq 0)(h(t)=0)$.
+
+2. Casuality
+A system is casual if and only if:
+$$
+\forall (t< 0)(h(t)=0)
+$$
+One can envision a proof simply by analogy according to previous proof.
+
+3. Invertibility
+If there exists an impulse response $h_{inv}$, such that:
+$$
+h\ast h_{inv}=\delta
+$$
+Then the system is invertible.
+
+4. BIBO Stability
+If the impulse response $h$ satisfies:
+$$
+\int_{-\infty}^{\infty}|h(t)|\text dt < \infty
+$$
+Then the system is BIBO stable.
+
+5. Eigenfunctions 
+Given a LTI system, the following holds:
+$$
+\forall(s\in\mathbb C)[\mathscr Hx(t)=H(s)e^{st}]
+$$
+In which:
+$$
+H(s)=\int_{-\infty}^\infty h(\tau)e^{-s\tau}\text d\tau
+$$
+$H(s)$ is called the transfer function of the system $\mathscr H$.
+^LTI-eigenfunction
+# Differential Equations
+Differential equations play an irreplaceable role in modeling the behaviour of a continuous-time system. It's very obvious that the derivative operator to time $\mathcal D=\frac{d}{dt}$ is linear and time invariant, and this property comes very handy in solving DEs.
+Given the following simple DE:
+$$
+\def\D{\mathcal D}
+\D f-cf=(\D -c)f=0
+$$
+If we treat $\D$ as some unknown as well, one can easily solve it algebraically:
+$$
+\D=c,\text{or} f\equiv0
+$$
+The latter one is trivial. The former solution, however, is interesting. Because the operator $\D$ is function-specific, it suggests that if we can find a function $f$, whose derivative is the same as multiplying by constant $c$, then it will be a solution to the DE. Obviously, the solution is:
+$$
+f=Ae^{ct} \text{, where $A$ is a constant.}
+$$
+and it is indeed the solution to the original DE.
+
+Given the following DE:
+$$
+\def\D{\mathcal D}
+\D f-cf=(\D -c)f=h
+$$
+Via some simple rearrangements and expansion:
+$$
+f=\frac{h}{\D-c}=-\frac 1c \left(\sum_{n=0}^\infty \frac{\D^n}{c^n}\right)h
+$$
+Note that because of:
+$$
+f=\frac{\mathcal I(e^{-ct}h)}{e^{-ct}}
+$$
+we get the following relation:
+$$
+-\frac {e^{-ct}}c (\sum_{n=0}^\infty \frac{\D^n}{c^n})h=I(e^{-ct}h)
+$$
+In summary, we conclude that:
+$$
+\D f-cf=h
+$$
+has the solution:
+$$
+f=-\frac 1c \left(\sum_{n=0}^\infty \frac{\D^n}{c^n}\right)h+c_0e^{cx}=\frac{h+0}{\D-c}
+$$
+which is a combination of special solution and general solution.
+Elegant, isn't it?
+
+
+
+# Continuous-Time Fourier Series
+Given a periodic signal $x(t)$, its fourier series is:
+$$
+x(t)=\sum_{k=-\infty}^\infty c_ke^{jk\omega_0 t}
+$$
+Evidently, it's being expressed as a sum of sinusoids.
+The $k=\pm K$ terms are called the *K-th harmonic components*.
+If a signal $x$ has a Fourier series coefficient sequence $c$, it's notified as:
+$$
+\def\ctfs{\stackrel{CTFS}{\longleftrightarrow}}
+x(t)\ctfs c_k
+$$
+If $x$ has a period of $T$, the coefficients are calculated as such:
+$$
+c_k=\frac 1T\int_T x(t)e^{-jk\omega_0 t}\text dt
+$$
+(Fourier series of an impulse train) 
+$$
+x(t)=A\sum_{n=-\infty}^\infty \delta(x-nT)
+$$
+Plugging in the signal, we get:
+$$
+c_k=\frac 1T\int_{-T/2}^{T/2} A\delta(x)e^{-jk\omega_0t}\text dt
+=\frac AT
+$$
+
+There are two senses in which the series may converge:
+Define the partial series:
+$$
+x_N(t)=\sum_{k=-N}^Nc_ke^{jk\omega_0 t}
+$$
+Then the error is given by:
+$$
+e_N(t)=x(t)-x_N(t)
+$$
+The MSE is defined as:
+$$
+E_N=\frac 1T\int_T|e_N(t)|^2\text dt
+$$
+In the case of *pointwise convergence*:
+$$
+\forall t[\lim_{N\rightarrow\infty}e_N(t)=0]
+$$
+While in the case of *MSE convergence*:
+$$
+\lim_{N\rightarrow\infty}E_N=0
+$$
+
+If a periodic signal $x$ is continuous and the coefficients for its Fourier series $c_k$ are absolutely summable (i.e. $\sum_{k=-\infty}^\infty |c_k|<\infty$), then the series converge uniformly.
+
+If a periodic function $x$ has finite energy over a single period, the Fourier series will converge in the MSE sense.
+
+## Properties of CTFS
+1. Linearity
+$$
+x(t)\ctfs a_k, y(t)\ctfs b_k\Rightarrow Ax(t)+By(t)\ctfs Aa_k+Bb_k
+$$
+2. Time shifting
+$$
+x(t-t_0)\ctfs a_ke^{-jk\omega_0 t_0}
+$$
+3. Frequency shifting
+$$
+e^{jM\omega_0 t}x(t) \ctfs a_{k-M}
+$$
+4. Time reversal
+$$
+x(-t) \ctfs a_{-k}
+$$
+5. Conjugation
+$$
+x^\ast(t) \ctfs a_{-k}^\ast
+$$
+6. Periodic convolution
+Let $z(t)=x(t)\ast y(t)$, where $x(t), y(t)$ have a period of $T$:
+$$
+z(t)\ctfs Ta_kb_k
+$$
+7. Multiplication
+Let $z(t)=x(t)y(t)$, where $x(t), y(t)$ have a period of $T$:
+$$
+z(t)\ctfs \sum_{n=-\infty}^\infty a_nb_{k-n}
+$$
+8. Parseval's identity
+$$
+\frac 1T\int_T |x(t)|^2\text dt=\sum_{k=-\infty}^\infty |a_k|^2
+$$
+9. Misc.
+- $x$ is even $\Leftrightarrow$ $a$ is even
+- $x$ is odd $\Leftrightarrow$ $a$ is odd
+- $x$ is real $\Leftrightarrow$ $a$ is conjugate symmetric
+
+CTFS provides crucial insights into the properties of the signal. By plotting the magnitude and phase of the complex-valued coefficients of the series, we get the frequency spectrum of the function.
+
+## CTFS and LTI system
+Given a LTI system $\mathscr H$ and an input in the form $x(t)=e^{j\omega t}$,  the response have the following form:
+$$
+\mathscr H x(t)=H(\omega)x(t)
+$$
+where:
+$$
+H(\omega)=\int_{-\infty}^\infty h(t)e^{-j\omega t}\text dt
+$$
+This is a special case of the [previously mentioned theorem](#^LTI-eigenfunction), but do notice the different definition for the eigenvalue $H$.
+In the latter one, the $H$ is referred to as the *frequency response*. In the following section, we will use the $H$ of the latter definition.
+
+Given a signal that can be converted into CTFS: $x(t)\ctfs a_k$
+$$
+\mathscr Hx(t)
+=\sum_{k=-\infty}^\infty a_k\mathscr H e^{jk\omega_0t}
+=\sum_{k=-\infty}^\infty a_k H(k\omega_0) e^{jk\omega_0t}
+$$
+Hence: $$\mathscr H x(t)\ctfs a_kH(k\omega_0)$$
+Since frequency response characterize the behaviour of the system under all frequencies, it's natural that we can utilize it with CTFS to acquire response under every input.
+System will usually change the frequency composition of the signal passing through it, which is called *filtering*.
+An ideal lowpass filter filters out all frequency components below a certain frequency $\omega_c$, whose frequency response is:
+$$
+H(\omega)=\cases{
+1, |\omega| \leq \omega_c\\
+0, otherwise
+}
+$$
+Ideal highpass filter and ideal bandpass filter can be defined by analogy.
+# Continuous-Time Fourier Transform
+CTFS is powerful, but it has its drawbacks, like forcing the function's periodity. Let's try to solve this.
+given an aperiodic signal $x(t)$, we define:
+$$
+x_T(t)=\cases{
+x(t), -T/2\leq t<T/2\\
+0, otherwise
+}
+$$
+then,
+$$
+\bar x_T(t)=\sum_{k=-\infty}^\infty x_T(t+kT)
+$$
+Now we apply CTFS: $\bar x_T(t) \ctfs c_k$, where:
+$$
+c_k=\frac 1T\int_T \bar x_T(t)e^{-jk\omega_0t}\text dt
+=\frac {\omega_0}{2\pi}\int_{-\infty}^\infty x_T(t)e^{-jk\omega_0t}\text dt
+$$
+Naturally:
+$$
+\bar x_T(t) = \sum_{k=-\infty}^\infty
+\left[
+\frac {\omega_0}{2\pi}\int_{-\infty}^\infty x_T(\tau)e^{-jk\omega_0 \tau}\text d\tau
+\right]e^{jk\omega_0 t}
+$$
+We also have the following property: $\lim_{T\rightarrow \infty}\bar x_T(t)=x(t)$. Hence equivalently:
+$$
+x(t)=\lim_{\omega_0\rightarrow 0} 
+\frac 1{2\pi}
+\sum_{k=-\infty}^\infty\left[
+\int_{-\infty}^\infty x_T(\tau)e^{-jk\omega_0 \tau}\text d\tau
+\right]e^{jk\omega_0 t}\omega_0
+$$
+We can rewrite the equation as:
+$$
+x(t)=\frac 1{2\pi}\int_{-\infty}^\infty X(\omega) e^{j\omega t}\text d\omega
+$$
+Where:
+$$
+X(\omega)=\int_{-\infty}^\infty x(t)e^{-j\omega t}\text dt
+$$
