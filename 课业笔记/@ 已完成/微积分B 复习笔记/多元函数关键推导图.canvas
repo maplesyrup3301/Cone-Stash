@@ -1,0 +1,15 @@
+{
+	"nodes":[
+		{"id":"f62bcb29b47efcee","type":"text","text":"可微","x":-260,"y":-88,"width":250,"height":60},
+		{"id":"a41c272f7d032adf","type":"text","text":"连续","x":40,"y":-88,"width":250,"height":60},
+		{"id":"c48ad3758c513f07","type":"text","text":"极限","x":340,"y":-88,"width":250,"height":60},
+		{"id":"c5689aedb7e26c57","type":"text","text":"偏导数在某点存在","x":-260,"y":40,"width":250,"height":60},
+		{"id":"becb51ddf4eaaeeb","type":"text","text":"偏导数连续","x":-540,"y":-88,"width":220,"height":60}
+	],
+	"edges":[
+		{"id":"dd7ec43c26166ca7","fromNode":"becb51ddf4eaaeeb","fromSide":"right","toNode":"f62bcb29b47efcee","toSide":"left"},
+		{"id":"ce118c4263a00ae6","fromNode":"f62bcb29b47efcee","fromSide":"bottom","toNode":"c5689aedb7e26c57","toSide":"top"},
+		{"id":"2853d04cfcecda1c","fromNode":"f62bcb29b47efcee","fromSide":"right","toNode":"a41c272f7d032adf","toSide":"left"},
+		{"id":"5de90c47e8e8eae8","fromNode":"a41c272f7d032adf","fromSide":"right","toNode":"c48ad3758c513f07","toSide":"left"}
+	]
+}
