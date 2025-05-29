@@ -48,3 +48,46 @@
 \end{document}
 ```
 
+3. 硅
+```tikz
+\usepackage{circuitikz}
+\begin{document}
+\begin{circuitikz}[american voltages, european resistors]
+\ctikzset{
+	bipoles/thickness=4,
+	resistors/scale=0.75,
+	capacitors/scale=0.75,
+	csources/scale = 0.75
+}
+
+\draw (0, 0) to[short, o-] (1, 0) -- (3, 0) -- (5, 0) -- (7, 0) to[short, -o] (8, 0);
+\draw (0, 3) to[short, o-] (1, 3) -- (3, 3);
+\draw (5, 3) -- (7, 3) to[short, -o] (8, 3);
+\draw (1, 0) to[R, l=$y_{ie}$] (1, 3);
+\draw (7, 0) to[R, l_=$y_{oe}$] (7, 3);
+\draw (3, 3) to[cI, i>_=$y_{re}\dot V_{c}$] (3, 0);
+\draw (5, 3) to[cI, i>=$y_{fe}\dot V_{b}$] (5, 0);
+\draw (0, 3) to[open, v>=$\dot V_b$] (0, 0);
+\draw (8, 3) to[open, v^>=$\dot V_c$] (8, 0);
+\end{circuitikz}
+\end{document}
+```
+```tikz
+\usepackage{circuitikz}
+\begin{document}
+\begin{circuitikz}[american voltages, european resistors]
+\draw (0, 0) to[R, l=$R_1$] (2, 0) to[R, l=$R_2$] (4,0);
+\end{circuitikz}
+\end{document}
+```
+
+```tikz
+\usepackage{circuitikz}
+\begin{document}
+\begin{circuitikz}[american voltages, european resistors]
+\draw (0, 0) -- (1, 0) -- (1, 1) to[R, l=$R_1$] (3, 1) -- (3, 0) -- (4, 0);
+\draw (1, 0) -- (1, -1) to[R, l=$R_2$] (3,-1) -- (3, 0);
+\end{circuitikz}
+\end{document}
+```
+

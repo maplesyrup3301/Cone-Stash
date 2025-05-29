@@ -143,4 +143,14 @@ TikZ支持在LaTex中加入各类图像，本笔记的目的是初步介绍TikZ�
 \end{document}
 ```
 
+```tikz
+\usepackage{circuitikz}
+\begin{document}
+\begin{circuitikz}[american voltages, european resistors]
+\draw (0, 0) to[R, l=$R_1$] (2, 0) to[R, l=$R_2$] (4,0);
+\end{circuitikz}
+\end{document}
+```
+
+
 
